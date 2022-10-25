@@ -6,5 +6,24 @@
 // But instead we're going to implement it from scratch:
 var getElementsByClassName = function(className
 ) {
-  // your code here
+
+  var result = [];
+
+  var innerFunction = function(node) {
+    if (node.classList && node.classList.contains(className)) {
+      result.push(node);
+    }
+    if (!node.childNodes) {
+      return;
+    }
+   var nodeList =  node.childNodes;
+   for (var i = 0; i < nodeList.length; i++) {
+    innerFunction(nodeList[i]);
+   }
+  }
+  innerFunction(document.body);
+
+  return result;
+
 };
+
